@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smurfs Event</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Fredoka One', cursive;
+    }
+
+    body {
+      background-color: #e0f7fa;
+      color: #034694;
+      overflow-x: hidden;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Navbar styling */
+    nav {
+      position: sticky;
+      top: 0;
+      background-color: #0288d1;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      z-index: 1000;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      padding: 15px 20px;
+      gap: 40px;
+    }
+
+    nav ul li {
+      position: relative;
+    }
+
+    nav ul li a {
+      color: #e0f7fa;
+      text-decoration: none;
+      font-size: 1.2rem;
+      padding: 5px 0;
+      display: inline-block;
+      transition: color 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    /* Underline effect using ::after */
+    nav ul li a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0%;
+      height: 3px;
+      background: #81d4fa;
+      transition: width 0.3s ease;
+      border-radius: 3px;
+    }
+
+    nav ul li a:hover {
+      color: #ffffff;
+      transform: scale(1.1);
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    /* Header adjustments to avoid overlap with sticky nav */
+    header {
+      background: url("Images/image24.jpg") no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      animation: fadeIn 2s ease-in;
+      padding-top: 60px; /* offset for sticky nav height */
+    }
+
+    header img {
+      width: 300px;
+      margin-bottom: 20px;
+    }
+
+    section.video-section {
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+      background: #c8e6c9;
+    }
+
+    section.video-section video {
+      width: 90%;
+      max-width: 800px;
+      border-radius: 20px;
+    }
+
+    section.event-details {
+      padding: 40px 20px;
+      text-align: center;
+      background: #fff9c4;
+    }
+
+    section.event-details h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    section.event-details p {
+      font-size: 1.2rem;
+      margin: 10px 0;
+    }
+
+    /* Updated Gallery Section */
+    .gallery h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2.5rem;
+      color: #034694;
+    }
+
+    .gallery-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto 40px auto;
+    }
+
+    .gallery-scroll {
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      gap: 20px;
+      padding: 10px 0;
+      scrollbar-width: none; /* Firefox */
+    }
+
+    .gallery-scroll::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
+    }
+
+    .gallery img {
+      flex-shrink: 0;
+      width: 250px;
+      border-radius: 20px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .scroll-btn {
+      background-color: #4fc3f7;
+      border: none;
+      color: white;
+      font-size: 2rem;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 50%;
+      margin: 0 10px;
+      user-select: none;
+      transition: background-color 0.3s;
+      z-index: 10;
+    }
+
+    .scroll-btn:hover {
+      background-color: #0288d1;
+    }
+
+    .scroll-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .form-section {
+      background: #b3e5fc;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .form-section form {
+      max-width: 500px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .form-section input, .form-section button {
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+
+    .form-section button {
+      background-color: #4fc3f7;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .form-section button:hover {
+      background-color: #0288d1;
+    }
+
+    footer {
+      background: #81d4fa;
+      text-align: center;
+      padding: 20px;
+    }
+
+    footer a {
+      margin: 0 10px;
+      color: #01579b;
+      text-decoration: none;
+      font-size: 1.5rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @media (max-width: 600px) {
+      header img {
+        width: 200px;
+      }
+
+      nav ul {
+        gap: 20px;
+        padding: 10px 15px;
+      }
+
+      nav ul li a {
+        font-size: 1rem;
+      }
+
+      .gallery img {
+        width: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="#header">Home</a></li>
+      <li><a href="#video-section">Video</a></li>
+      <li><a href="#event-details">Event Details</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#form-section">Register</a></li>
+    </ul>
+  </nav>
+
+  <header id="header">
+    <img src="Images/image25.png" alt="Smurfs Logo" />
+  </header>
+
+  <section class="video-section" id="video-section">
+    <video src="Images/video3.mp4" autoplay muted loop playsinline>
+      Sorry, your browser does not support embedded videos.
+    </video>
+  </section>
+
+  <section class="event-details" id="event-details">
+    <h2>Smurfs Event</h2>
+    <p><strong>Date:</strong> July 18</p>
+    <p><strong>Location:</strong> Smurf Village, Dubai Parks and Resorts</p>
+    <p><strong>Activities:</strong> Meet & Greet, Games, Photo Booths, Smurf Parade</p>
+  </section>
+
+  <section class="gallery" id="gallery">
+    <h2>Gallery</h2>
+    <div class="gallery-container">
+      <button class="scroll-btn left" aria-label="Scroll Left">&#9664;</button>
+      <div class="gallery-scroll">
+        <img src="Images/image26.jpg" alt="Smurf 1" />
+        <img src="Images/image27.jpg" alt="Smurf Poster" />
+        <img src="Images/image28.jpg" alt="Smurf Scene" />
+        <img src="Images/image29.jpeg" alt="Smurf Party" />
+        <img src="Images/image30.jpeg" alt="Smurf Fun" />
+        <img src="Images/image31.jpg" alt="Smurf Parade" />
+        <img src="Images/image32.jpg" alt="Smurf Games" />
+        <img src="Images/image33.jpg" alt="Smurf Friends" />
+      </div>
+      <button class="scroll-btn right" aria-label="Scroll Right">&#9654;</button>
+    </div>
+  </section>
+
+  <section class="form-section" id="form-section">
+    <h2>Register Now</h2>
+    <form>
+      <input type="text" placeholder="Name" required />
+      <input type="email" placeholder="Email" required />
+      <input type="tel" placeholder="Phone No." required />
+      <button type="submit">Join the Fun!</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>Follow Us:</p>
+    <a href="#" aria-label="Facebook">📘</a>
+    <a href="#" aria-label="Instagram">📸</a>
+    <p>Contact: www.smurfsevent.com</p>
+  </footer>
+
+  <script>
+    const scrollContainer = document.querySelector('.gallery-scroll');
+    const btnLeft = document.querySelector('.scroll-btn.left');
+    const btnRight = document.querySelector('.scroll-btn.right');
+
+    const scrollAmount = 300; // px to scroll on each click
+
+    btnLeft.addEventListener('click', () => {
+      scrollContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+
+    btnRight.addEventListener('click', () => {
+      scrollContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+
+    // Disable buttons at scroll limits
+    function updateButtons() {
+      btnLeft.disabled = scrollContainer.scrollLeft === 0;
+      btnRight.disabled = scrollContainer.scrollLeft + scrollContainer.clientWidth >= scrollContainer.scrollWidth;
+    }
+
+    scrollContainer.addEventListener('scroll', updateButtons);
+    window.addEventListener('resize', updateButtons);
+
+    // Initial check
+    updateButtons();
+  </script>
+
+</body>
+</html>
